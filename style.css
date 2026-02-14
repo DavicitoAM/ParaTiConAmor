@@ -1,0 +1,420 @@
+/* style.css */
+
+:root {
+    /* Paleta Coquette: Rosa Pastel, Lila Suave, Blanco Crema, Rojo Cereza */
+    --bg-gradient: linear-gradient(180deg, #fff0f5 0%, #f3e5f5 50%, #fff0f5 100%);
+    --primary-text: #5d4037;
+    /* Marrón chocolate suave (texto cuerpo) */
+    --accent-red: #c2185b;
+    /* Rojo Cereza / Vino (títulos y acentos) */
+    --glass-white: rgba(255, 255, 255, 0.6);
+    --border-pink: #f8bbd0;
+    --shadow-soft: 0 10px 30px rgba(194, 24, 91, 0.1);
+
+    --font-script: 'Pinyon Script', cursive;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-gradient);
+    color: var(--primary-text);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    /* Evita scroll horizontal */
+}
+
+/* CANVAS DE FONDO */
+#flower-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    /* Detrás de todo */
+    pointer-events: none;
+}
+
+/* TIPOGRAFÍA */
+.script-title {
+    font-family: var(--font-script);
+    color: var(--accent-red);
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.8);
+}
+
+.center {
+    text-align: center;
+}
+
+.red-text {
+    color: var(--accent-red);
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+/* ESTRUCTURA GENERAL */
+.section-padding {
+    min-height: 100vh;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+}
+
+/* HERO SECTION */
+.hero {
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: clamp(3rem, 8vw, 5rem);
+    color: var(--accent-red);
+    font-family: var(--font-script);
+}
+
+.hero p {
+    color: #886060;
+    font-size: 1.2rem;
+}
+
+.scroll-indicator {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0.6;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+/* MEMORY SECTION */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.polaroid {
+    background: #fff;
+    padding: 15px 15px 50px 15px;
+    box-shadow: var(--shadow-soft);
+    transform: rotate(-3deg);
+    transition: transform 0.5s ease;
+    text-align: center;
+    border: 1px solid var(--border-pink);
+}
+
+.polaroid:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.polaroid img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: sepia(10%);
+}
+
+.caption {
+    font-family: var(--font-script);
+    font-size: 1.8rem;
+    color: #888;
+    margin-top: 15px;
+}
+
+/* style.css - SECCIÓN DE MÚSICA (ESTILO COLLAGE/SCRAPBOOK) */
+
+.music-section {
+    /* Aseguramos espacio suficiente para el desorden */
+    padding-bottom: 6rem;
+}
+
+.music-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    /* Alineación superior para que los márgenes funcionen bien */
+    gap: 1.5rem;
+    /* Espacio base reducido para fomentar la superposición */
+    margin-top: 3rem;
+    /* Un poco de padding lateral para que las tarjetas rotadas no se corten */
+    padding: 2rem;
+}
+
+/* NUEVA TARJETA ESTILO SCRAPBOOK */
+.music-card.scrapbook-style {
+    /* Quitamos el ancho fijo, ahora se adapta al contenido */
+    width: auto;
+    /* Pero ponemos límites para que no sean gigantes */
+    max-width: 260px;
+    min-width: 180px;
+
+    /* Estilo "Nota de Papel / Foto Pegada" */
+    background: #fff;
+    /* Fondo de papel blanco */
+    padding: 12px;
+    /* Borde blanco estilo foto instantánea */
+    border-radius: 4px;
+    /* Bordes ligeramente redondeados */
+
+    /* Sombra más realista de objeto pegado */
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.15);
+
+    text-decoration: none;
+    color: var(--primary-text);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Transición suave */
+    position: relative;
+
+    /* Borde sutil para definir la "tarjeta" */
+    border: 1px solid #eee;
+}
+
+/* Efecto al pasar el mouse: se endereza y levanta */
+.music-card.scrapbook-style:hover {
+    transform: rotate(0deg) scale(1.05) !important;
+    /* !important para sobrescribir la rotación inline */
+    box-shadow: 0 10px 25px rgba(194, 24, 91, 0.25);
+    z-index: 100 !important;
+    /* Que se ponga por encima de todas */
+}
+
+/* Contenedor de la imagen */
+.card-image {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    /* Filtro opcional para dar aspecto "impreso" o antiguo */
+    filter: sepia(15%) contrast(1.05);
+}
+
+.card-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    /* Asegura que la imagen no sea más ancha que la tarjeta */
+    max-width: 100%;
+}
+
+/* Contenido de texto debajo de la imagen */
+.card-content {
+    text-align: center;
+    padding: 0 5px;
+}
+
+.song-icon {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 0.3rem;
+    color: var(--accent-red);
+}
+
+.song-title {
+    font-weight: 700;
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 3px;
+    font-family: var(--font-body);
+}
+
+.song-desc {
+    font-size: 0.85rem;
+    font-style: italic;
+    opacity: 0.8;
+    line-height: 1.4;
+}
+
+/* OPCIONAL: Decoración tipo "Washi Tape" (Cinta adhesiva) */
+/* Si te gusta, descomenta esto para un toque extra de manualidad */
+
+.music-card.scrapbook-style::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 15px;
+    background-color: rgba(248, 187, 208, 0.7);
+    opacity: 0.8;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+
+/* BOTONES */
+.btn-primary {
+    background: #fff;
+    border: 2px solid var(--accent-red);
+    color: var(--accent-red);
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: var(--font-body);
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+.btn-primary:hover {
+    background: var(--accent-red);
+    color: #fff;
+    box-shadow: 0 10px 20px rgba(194, 24, 91, 0.3);
+}
+
+/* OVERLAY CARTA */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 240, 245, 0.95);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s;
+}
+
+.overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.letter-card {
+    background: #fff;
+    width: 90%;
+    max-width: 600px;
+    padding: 3rem;
+    border-radius: 10px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    position: relative;
+    border: 2px solid #fce4ec;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.close-overlay {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.proposal-box {
+    margin-top: 2rem;
+    text-align: center;
+    border-top: 1px dashed #ccc;
+    padding-top: 2rem;
+}
+
+.proposal-question {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--accent-red);
+}
+
+.buttons-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.btn-yes {
+    background: var(--accent-red);
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.btn-no {
+    background: #eee;
+    color: #555;
+    border: none;
+    padding: 12px 35px;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    cursor: pointer;
+    position: relative;
+    /* Importante para moverlo */
+}
+
+/* SECCIÓN FINAL (Oculta) */
+.hidden {
+    display: none !important;
+}
+
+.final-section {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.highlight {
+    color: var(--accent-red);
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin: 2rem 0;
+}
+
+.footer-sign {
+    margin-top: 3rem;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .script-title {
+        font-size: 2.8rem;
+    }
+
+    .music-card {
+        width: 100%;
+    }
+}
